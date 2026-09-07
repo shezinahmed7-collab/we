@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #FAF7F2;
+  --color-card: #FFFFFF;
+  --color-accent: #C5A869;
+  --color-accent-light: #EBDCBA;
+  --color-accent-dark: #9E7F3B;
+  --color-text: #23211F;
+  --color-text-muted: #6E6862;
+}
+
+/* Warm cotton-paper tactile texture */
+.paper-texture {
+  background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(rgba(197, 168, 105, 0.05) 1px, transparent 0),
+    radial-gradient(rgba(35, 33, 31, 0.02) 1px, transparent 0);
+  background-size: 28px 28px, 14px 14px;
+}
+
+/* Luxury card with subtle embossed shadow and GPU compositing */
+.invitation-card {
+  background: var(--color-card);
+  box-shadow: 
+    0 16px 40px -12px rgba(35, 33, 31, 0.05),
+    0 2px 6px rgba(35, 33, 31, 0.02),
+    inset 0 0 0 1px rgba(197, 168, 105, 0.16);
+  border-radius: 2px;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Double hairline border in champagne gold */
+.ornate-border {
+  position: relative;
+}
+
+.ornate-border::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(197, 168, 105, 0.28);
+  pointer-events: none;
+}
+
+/* Geometric Corner Accents */
+.geometric-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.geometric-corner-tl { top: 10px; left: 10px; border-top: 1px solid rgba(197, 168, 105, 0.7); border-left: 1px solid rgba(197, 168, 105, 0.7); }
+.geometric-corner-tr { top: 10px; right: 10px; border-top: 1px solid rgba(197, 168, 105, 0.7); border-right: 1px solid rgba(197, 168, 105, 0.7); }
+.geometric-corner-bl { bottom: 10px; left: 10px; border-bottom: 1px solid rgba(197, 168, 105, 0.7); border-left: 1px solid rgba(197, 168, 105, 0.7); }
+.geometric-corner-br { bottom: 10px; right: 10px; border-bottom: 1px solid rgba(197, 168, 105, 0.7); border-right: 1px solid rgba(197, 168, 105, 0.7); }
+
+/* GPU-accelerated layer promotion */
+.gpu-layer {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Animation Keyframes with GPU-accelerated translate3d */
+@keyframes softFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes letterExpand {
+  from {
+    letter-spacing: 0.1em;
+    opacity: 0;
+  }
+  to {
+    letter-spacing: 0.3em;
+    opacity: 1;
+  }
+}
+
+@keyframes goldBreathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(197, 168, 105, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(197, 168, 105, 0);
+  }
+}
+
+.animate-letter-expand {
+  animation: letterExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-gold-breathe {
+  transform: translate3d(0, 0, 0);
+  animation: goldBreathingGlow 3s infinite;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
