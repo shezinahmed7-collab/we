@@ -14,8 +14,8 @@ export const weddingData: WeddingData = {
         residence: "Sreeshailam, Ampalathumkala"
       },
       bride: {
-        father: "Udayakumar D",
-        mother: "Suja Sudhakar",
+        father: "Mr. Udayakumar D",
+        mother: "Mrs. Suja Sudhakar",
         sibling: "Diya Uday",
         residence: "Nest, Parippally"
       }

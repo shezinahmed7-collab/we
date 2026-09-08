@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { weddingData } from './config/weddingData';
 import { Hero } from './components/Hero';
 import { InvitationIntro } from './components/InvitationIntro';
@@ -14,6 +15,8 @@ import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   // Bind centralized theme tokens directly to CSS custom variables
   useEffect(() => {
@@ -37,7 +40,10 @@ export const App: React.FC = () => {
 
     const playAudio = () => {
       if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.play().catch((err) => {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          setIsMuted(audioRef.current?.muted ?? false);
+        }).catch((err) => {
           console.warn('Audio waiting for explicit user gesture:', err);
         });
       }
@@ -58,7 +64,10 @@ export const App: React.FC = () => {
   const handleOpenInvitation = () => {
     // Trigger background audio immediately upon clicking "OPEN INVITATION"
     if (audioRef.current && audioRef.current.paused) {
-      audioRef.current.play().catch((err) => {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        setIsMuted(audioRef.current?.muted ?? false);
+      }).catch((err) => {
         console.warn('Audio play initiated on user click:', err);
       });
     }
@@ -67,6 +76,27 @@ export const App: React.FC = () => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const toggleMute = () => {
+    if (!audioRef.current) return;
+
+    // If audio is paused, start playback unmuted
+    if (audioRef.current.paused) {
+      audioRef.current.muted = false;
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        setIsMuted(false);
+      }).catch((err) => {
+        console.warn('Audio play initiated on toggle click:', err);
+      });
+      return;
+    }
+
+    // Toggle muted state directly on existing audio instance without resetting playback position
+    const nextMuted = !audioRef.current.muted;
+    audioRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
   };
 
   return (
@@ -81,7 +111,30 @@ export const App: React.FC = () => {
           playsInline
           className="hidden"
           aria-hidden="true"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onVolumeChange={() => {
+            if (audioRef.current) {
+              setIsMuted(audioRef.current.muted);
+            }
+          }}
         />
+      )}
+
+      {/* Floating Audio Mute / Toggle Button */}
+      {weddingData.music?.enabled && (
+        <button
+          onClick={toggleMute}
+          className="fixed bottom-6 right-6 z-50 bg-[#FAF7F2]/90 backdrop-blur-md border border-[#C5A869]/40 text-[#2D2926] p-3 rounded-full shadow-lg hover:border-[#C5A869] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center group"
+          aria-label={isMuted || !isPlaying ? "Unmute background music" : "Mute background music"}
+          title={isMuted || !isPlaying ? "Unmute music" : "Mute music"}
+        >
+          {isPlaying && !isMuted ? (
+            <Volume2 className="w-5 h-5 text-wedding-accent transition-colors" />
+          ) : (
+            <VolumeX className="w-5 h-5 text-wedding-muted transition-colors" />
+          )}
+        </button>
       )}
 
       {/* 1. Landing & Hero Unveil (Stationery Card Aesthetics) */}
