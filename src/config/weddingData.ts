@@ -68,6 +68,24 @@ export const weddingData: WeddingData = {
         startDate: "20261203T061900Z",
         endDate: "20261203T073000Z"
       }
+    },
+    {
+      name: "Wedding Reception",
+      day: "Saturday",
+      date: "December 5, 2026",
+      time: "4:00 PM onwards",
+      venue: "East Residence",
+      address: "Sabari Interlocking Bricks, Ampalathumkala",
+      description: "An evening of celebration, dinner, and togetherness.",
+      mapsUrl: "https://maps.google.com/?q=Sabari+Interlocking+Bricks+Ampalathumkala",
+      calUrl: "https://calendar.google.com",
+      calendarDetails: {
+        title: "Dr. Sreehari & Dr. Daya Uday Wedding Reception",
+        description: "An evening of celebration, dinner, and togetherness.",
+        location: "East Residence, Sabari Interlocking Bricks, Ampalathumkala",
+        startDate: "20261205T103000Z",
+        endDate: "20261205T153000Z"
+      }
     }
   ],
 
