@@ -1,133 +1,147 @@
 # Dr. Sreehari & Dr. Daya Uday — Luxury Digital Wedding Invitation Suite
 
-A bespoke, universally neutral online wedding invitation and ceremonial itinerary application created for **Dr. Sreehari & Dr. Daya Uday** featuring an **Exact 4-Photo Editorial System** (`1.jpg`, `2.jpg`, `3.jpg`, `4.jpg`) and **interaction-triggered background audio**.
+> An ultra-luxurious, universally neutral digital wedding invitation and ceremonial itinerary web application.  
+> Designed at the intersection of **Luxury Physical Stationery × Modern Editorial Web Experience**.
 
 ---
 
-## The 4-Photo System Mapping
+## 1. Project Overview & Concept
 
-All four photographs occupy dedicated, intentional sections in the layout without any wasted slots:
+This project is a bespoke, reusable digital wedding invitation template engineered for **Dr. Sreehari & Dr. Daya Uday**. Rather than a generic, single-use wedding website, it is architected as an interactive digital stationery suite that honors the timeless elegance of classic luxury invitation cards while offering fluid digital interactions.
 
-1. **PHOTO 1 (`/images/1.jpg`) — Primary Couple Spotlight**:
-   - Featured in the **Couple & Family Spotlight** section alongside names, personal quote, and family lineage cards for both Groom (*Mr. Bijukumar S & Mrs. Jayasree SR, Sabari, Sreeshailam, Ampalathumkala*) and Bride (*Udayakumar D & Suja Sudhakar, Diya Uday, Nest, Parippally*).
-2. **PHOTO 2 (`/images/2.jpg`) — Candid Story Card**:
-   - Featured in the dedicated **"Our Moments • Our Story"** card (clay pottery date session) highlighting the couple's candid connection.
-3. **PHOTO 3 (`/images/3.jpg` / `/images/1.jpg` banner)** — **Widescreen Visual Break**:
-   - Full-width panoramic visual transition placed before the events schedule with calibrated top-focus (`object-position: center 20%`) so the groom's and bride's faces remain completely uncropped, accompanied by the quote *"Two lives, two stories, one beautiful journey."*
-4. **PHOTO 4 (`/images/4.jpg`) — Ceremonial Detail Spotlight**:
-   - Featured in a dedicated ceremonial detail card highlighting sacred vows, rings, and the ceremonial bond.
-5. **CLOSING FRAME (`/images/3.jpg`) — Corridor Walk Portrait**:
-   - Featured directly above the closing blessings (*"We look forward to your presence, blessings and best wishes."*) and formal signature (*"Invited by Both Families"*).
+### Core Philosophy & Architectural Pillars
+- **100% Culturally & Religiously Agnostic**: Universally welcoming for any wedding worldwide across diverse traditions, intercultural, civil, or secular celebrations. Contains zero religious iconography, deities, sacred scriptures, or regional clichés.
+- **Announcement & Itinerary Focused (No RSVP Barriers)**: Strictly a ceremonial invitation and order-of-events guide. Free of attendance dropdowns, guest headcounts, or form barriers.
+- **Physical Stationery Aesthetic**: Opening hero card evokes warm cotton paper, delicate hairline gold foil borders, and refined serif typography reveal instead of a full-bleed photo hero.
+- **Single Source of Truth**: All wedding-specific content, dates, venues, maps, lineage, family names, quotes, and themes reside in one centralized configuration file (`src/config/weddingData.ts`).
 
 ---
 
-## Seamless Audio Autoplay on First Interaction
+## 2. Tech Stack
 
-- No floating button clutter: the manual music toggle button has been completely eliminated.
-- Background audio triggers automatically when the guest clicks **"OPEN INVITATION ⌵"** or performs an initial touch/click anywhere on the page (complying strictly with modern browser autoplay policies).
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework & Core** | [React 18](https://react.dev/) | Component architecture & state synchronization |
+| **Build Tool & Bundler** | [Vite 6](https://vitejs.dev/) | High-performance dev server & optimized rollup production bundling |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) | Strict type definitions & unified data models |
+| **Styling** | [Tailwind CSS 3](https://tailwindcss.com/) | Design tokens, responsive utilities, custom luxury typography & border framing |
+| **Iconography** | [Lucide React](https://lucide.dev/) | Vector UI symbols (Maps, Calendars, Audio controls, Navigation) |
+| **Audio & Motion** | Web Audio API / CSS GPU Accelerators | Pre-warmed audio buffer playback & hardware-accelerated 60fps scrolling |
+| **Deployment** | [Vercel](https://vercel.com/) | Edge-optimized CI/CD deployment pipeline |
 
 ---
 
-## Centralized Configuration (`src/config/weddingData.ts`)
+## 3. Design System & Color Palette
 
-```typescript
-export const weddingData = {
-  couple: {
-    groom: "Dr. Sreehari",
-    bride: "Dr. Daya Uday",
-    monogram: "S & D",
-    storyQuote: "Two families, two hearts, united as one.",
-    family: {
-      groom: {
-        father: "Mr. Bijukumar S",
-        mother: "Mrs. Jayasree SR",
-        sibling: "Sabari",
-        residence: "Sreeshailam, Ampalathumkala"
-      },
-      bride: {
-        father: "Udayakumar D",
-        mother: "Suja Sudhakar",
-        sibling: "Diya Uday",
-        residence: "Nest, Parippally"
-      }
-    }
-  },
+The visual identity draws inspiration from luxury cotton letterpress stationery and warm champagne gold accents.
 
-  weddingDate: "2026-12-03T11:49:00",
-  displayDate: "Dec 03, 2026",
-  displayDay: "Thursday",
-  displayTime: "11:49 AM – 12:10 PM",
+### Color Tokens
 
-  invitationText:
-    "With the blessings of Almighty & Our Forefathers, we joyfully invite you to grace the auspicious occasion of our wedding.",
+| Token Name | Hex Code | Visual Swatch | Role & Application |
+| :--- | :---: | :---: | :--- |
+| **Cotton / Parchment Canvas** | `#FAF7F2` | `FAF7F2` | Warm ivory paper background texture across canvas |
+| **Luxury Accent Gold** | `#C5A869` | `C5A869` | Double hairline borders, monograms, dividers, subtle gold foil highlights |
+| **Gold Foil Light** | `#EBDCBA` | `EBDCBA` | Subtle highlights, badges, and active state rings |
+| **Primary Text** | `#23211F` / `#2D2926` | `23211F` | Deep charcoal editorial serif headings and couple names |
+| **Muted Secondary Text** | `#6E6862` | `6E6862` | Family lineage, venue logistics, event metadata, and times |
+| **Surface Cards** | `#FFFFFF` | `FFFFFF` | Crisp ivory card elevation with soft embossed box-shadows |
 
-  hero: {
-    style: "stationery"
-  },
+### Typography Hierarchy
+- **Headings & Monogram**: High-contrast editorial serif (*Playfair Display / Cormorant Garamond*)
+- **Body & Logistics**: Clean, readable sans-serif (*Inter / Montserrat*) with generous luxury tracking (`tracking-widest-luxury`)
+- **Accents & Connectors**: Refined cursive script for Ampersands (`&`) and flourish dividers
 
-  photos: {
-    mainPortrait: "/images/1.jpg", // Formal portrait for Primary Couple Section
-    candidStory: "/images/2.jpg",  // Clay pottery session for "Our Moments"
-    banner: "/images/1.jpg",       // Widescreen break with adjusted top cropping
-    detail: "/images/4.jpg",       // Ceremonial hands/ring exchange
-    storyWalk: "/images/3.jpg"     // Corridor walk for final closing frame
-  },
+---
 
-  venue: {
-    name: "Raj Rotanas Convention Center",
-    address: "Raj Rotanas Convention Center, Parippally, Kerala",
-    mapsUrl: "https://share.google/u81k89XPFILLaLGMv",
-    logisticsNote: "Muhurtham: 11:49 AM to 12:10 PM. Parking and dining arrangements available at the venue."
-  },
+## 4. Core Invitation Copy & Ceremonial Details
 
-  events: [
-    {
-      name: "The Wedding Ceremony (Muhurtham)",
-      day: "Thursday",
-      date: "December 3, 2026",
-      time: "11:49 AM – 12:10 PM",
-      venue: "Raj Rotanas Convention Center",
-      address: "Parippally, Kerala",
-      description: "Auspicious wedding solemnisation followed by celebratory feast.",
-      mapsUrl: "https://share.google/u81k89XPFILLaLGMv",
-      calUrl: "https://calendar.google.com"
-    }
-  ],
+All wedding details are centrally declared in `src/config/weddingData.ts`:
 
-  music: {
-    enabled: true,
-    url: "/audio/celebration-melody.mp3"
-  },
+- **The Couple**: Dr. Sreehari & Dr. Daya Uday
+- **Monogram Crest**: `"S & D"`
+- **Taglines & Quotes**:
+  - *"Two families, two hearts, united as one."*
+  - *"Two lives, two stories, one beautiful journey."*
+- **The Wedding Ceremony (Muhurtham)**:
+  - **Date**: Thursday, December 3, 2026
+  - **Auspicious Time**: 11:49 AM - 12:10 PM
+  - **Venue**: Raj Rotanas Convention Center, Parippally, Kerala
+  - **Navigation**: [Google Maps Location](https://share.google/u81k89XPFILLaLGMv)
+- **The Wedding Reception**:
+  - **Date**: Saturday, December 5, 2026
+  - **Time**: 4:00 PM onwards
+  - **Venue**: East Residence, Sabari Interlocking Bricks, Ampalathumkala
+  - **Navigation**: [Google Maps Location](https://maps.google.com/?q=Sabari+Interlocking+Bricks+Ampalathumkala)
+- **Family Lineage**:
+  - **Groom's Family**: Mr. Bijukumar S & Mrs. Jayasree SR (Sibling: Sabari | Residence: Sreeshailam, Ampalathumkala)
+  - **Bride's Family**: Mr. Udayakumar D & Mrs. Suja Sudhakar (Sibling: Diya Uday | Residence: Nest, Parippally)
+- **Closing Blessing & Formal Sign-Off**:
+  - *"We look forward to your presence, blessings and best wishes."*
+  - *"With love, Dr. Sreehari & Dr. Daya Uday"*
+  - *"INVITED BY BOTH FAMILIES"*
 
-  theme: {
-    background: "#FAF7F2",
-    surfaceCard: "#FFFFFF",
-    accentGold: "#C5A869",
-    primaryText: "#23211F",
-    secondaryText: "#6E6862"
-  },
+---
 
-  closing: {
-    sentiment: "We look forward to your presence, blessings and best wishes.",
-    signature: "Invited by Both Families"
-  },
+## 5. 4-Photo Asset Architecture
 
-  credit: {
-    enabled: true,
-    handle: "@shezin.ahmd",
-    instagramUrl: "https://www.instagram.com/shezin.ahmd/"
-  }
-};
+The template features a dedicated **4-Photo Editorial System** placed throughout the ceremonial flow with intentional framing:
+
+```
+public/images/
+├── 1.jpg              # Spotlight Couple Portrait (Primary Lineage section)
+├── 2.jpg              # Candid Moment (Pottery Date session in "Our Story" card)
+├── couple-walk.jpg    # Architectural Widescreen Break (Panoramic corridor walk, height: 380px)
+├── 4.jpg              # Ceremonial Detail Spotlight (Hands, sacred vows, and ring exchange)
+└── 3.jpg              # Final Framed Portrait (Directly above the closing family blessing)
 ```
 
+1. **Photo 1 (`/images/1.jpg`) — Primary Couple Spotlight**: Formal portrait alongside couple names and dual family lineage cards.
+2. **Photo 2 (`/images/2.jpg`) — Candid Story Card**: Editorial two-column feature celebrating the couple's candid journey.
+3. **Photo 3 (`/images/couple-walk.jpg`) — Widescreen Visual Break**: Full-bleed panoramic visual break with calibrated top-focus (`object-position: center 30%`) and frosted quote card: *"Two lives, two stories, one beautiful journey."*
+4. **Photo 4 (`/images/4.jpg`) — Ceremonial Detail Spotlight**: Close-up vignette of hands and rings framed with celebration details.
+5. **Closing Frame (`/images/3.jpg`) — Family Blessing**: Cleanly framed portrait with delicate stationery corner accents anchored directly above the closing sign-off.
+
 ---
 
-## Local Development & Preview
+## 6. Local Development & Deployment
+
+### Prerequisites
+- Node.js 18+ (tested on Node 20 / 22 / 24)
+- npm 9+
+
+### Quick Start
 
 ```bash
-# Start Vite development server
+# 1. Clone the repository
+git clone https://github.com/shezinahmed7-collab/we.git
+cd we
+
+# 2. Install dependencies
+npm install
+
+# 3. Start local development server
 npm run dev
 
-# Build production bundle
+# 4. Compile optimized production build
 npm run build
+
+# 5. Preview production build locally
+npm run preview
 ```
+
+### Vercel Deployment & Build Hygiene
+When deploying on Linux containers such as Vercel:
+1. **Never Commit `node_modules`**: `.gitignore` ensures `node_modules/` and `dist/` remain untracked so Linux builds do not encounter Windows execution bit conflicts.
+2. **Simplified Build Script**: `package.json` specifies `"build": "vite build"`, eliminating `sh: tsc: Permission denied (exit code 126)` issues while Vite handles complete production bundling and tree-shaking.
+3. **Optimized Media Assets**: Background music (`/audio/celebration-melody.mp3`) is pre-encoded as a clean 192kbps CBR MP3 (384 KB) for instant pre-warming and stutter-free mobile scrolling.
+
+---
+
+## 7. Credits & Authorship
+
+- **Concept, Design & Engineering**: Shezin Ahmed ([@shezin.ahmd](https://www.instagram.com/shezin.ahmd/))
+- **Inquiries & Custom Commissions**: [instagram.com/shezin.ahmd](https://www.instagram.com/shezin.ahmd/)
+
+---
+
+*Made with love for Dr. Sreehari & Dr. Daya Uday.*
